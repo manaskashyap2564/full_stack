@@ -1,0 +1,78 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fb;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    padding: 32px 24px;
+}
+#timetable {
+    margin-top: 32px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    background: #f5f8fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+thead {
+    background: #2a4d7a;
+    color: #fff;
+}
+thead th {
+    padding: 10px 6px;
+    font-weight: 600;
+    font-size: 1em;
+}
+tbody td, tfoot td {
+    padding: 8px 6px;
+    text-align: center;
+    border-bottom: 1px solid #e0e7ef;
+}
+tbody tr:nth-child(even) {
+    background: #eaf1fb;
+}
+tfoot td {
+    background: #e0e7ef;
+    font-size: 0.95em;
+    color: #2a4d7a;
+    font-style: italic;
+    border-bottom: none;
+}
+@media (max-width: 700px) {
+    main {
+        padding: 12px 2vw;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead {
+        display: none;
+    }
+    tbody td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+    tbody td:before {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #2a4d7a;
+        content: attr(data-label);
+    }
+}
