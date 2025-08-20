@@ -1,48 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Manas Kashyap | Front-End Developer Portfolio</title>
+    <style>
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f9fb;
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background: #2a4d7a;
+            color: #fff;
+            padding: 1.5rem 0 1rem 0;
+            text-align: center;
+        }
+        nav {
+            margin-top: 0.5rem;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        nav a:focus, nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 2rem 1.5rem;
+        }
+        section {
+            margin-bottom: 2.5rem;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin: 0 0 0.5rem 0;
+        }
+        h2 {
+            color: #2a4d7a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        figure {
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+        }
+        figure img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #e0e7ef;
+        }
+        figcaption {
+            margin-top: 0.7rem;
+            font-size: 1.1rem;
+            color: #2a4d7a;
+        }
+        .resume-btn {
+            display: inline-block;
+            margin: 1.2rem 0 0 0;
+            padding: 0.7rem 1.5rem;
+            background: #2a4d7a;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .resume-btn:focus, .resume-btn:hover {
+            background: #18325a;
+        }
+        ul, ol {
+            padding-left: 1.2rem;
+        }
+        .projects article {
+            background: #f5f8fa;
+            border-radius: 7px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-list li {
+            margin-bottom: 0.5rem;
+        }
+        .timetable-link {
+            display: inline-block;
+            margin-top: 0.7rem;
+            color: #2a4d7a;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.08rem;
+        }
+        .timetable-link:focus, .timetable-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            main { padding: 1rem 0.3rem; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Manas Kashyap</h1>
+        <p>Front-End Developer</p>
+        <nav aria-label="Main navigation">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
     <main>
-        <section id="profile">
+        <section id="about">
             <figure>
-                <img src="assets/Semi-prof_pic.jpg" alt="Profile Photo" style="width:180px;height:auto;border-radius:10px;">
-                <figcaption><strong>Manas Kashyap</strong></figcaption>
+                <img src="assets/profile.jpg" alt="Manas Kashyap profile photo" aria-label="Profile photo of Manas Kashyap">
+                <figcaption>Manas Kashyap – Aspiring Front-End Developer</figcaption>
             </figure>
-            <div class="bio">
-                <h2>About Me</h2>
-                <p>Front-end developer passionate about building interactive and accessible web experiences. Adept at HTML, CSS, JavaScript, and modern frameworks. Eager to contribute creative solutions and learn new technologies.</p>
-            </div>
-            <div class="education">
-                <h2>Education</h2>
-                <ul>
-                    <li><strong>Bachelor of Technology (B.Tech)</strong> in Computer Science<br>XYZ University, 2022–2026</li>
-                </ul>
-            </div>
-            <div class="skills">
-                <h2>Skills</h2>
-                <ul>
-                    <li>HTML5, CSS3, JavaScript (ES6+)</li>
-                    <li>React.js, Bootstrap</li>
-                    <li>Responsive Web Design</li>
-                    <li>Git & GitHub</li>
-                </ul>
-            </div>
-            <div class="contact">
-                <h2>Contact</h2>
-                <ul>
-                    <li>Email: <a href="mailto:manas.kashyap@email.com">manas.kashyap@email.com</a></li>
-                    <li>LinkedIn: <a href="https://linkedin.com/in/manaskashyap" target="_blank">linkedin.com/in/manaskashyap</a></li>
-                </ul>
-                <p><a href="assets/Resume.pdf" target="_blank">Download Resume (PDF)</a></p>
-            </div>
+            <p>I am a passionate front-end developer focused on building accessible, responsive, and visually engaging web experiences. I enjoy working with HTML, CSS, and JavaScript to create user-friendly interfaces and am eager to contribute to innovative projects while continuously learning new technologies.</p>
+            <a class="resume-btn" href="assets/resume.pdf" download aria-label="Download Resume as PDF">Download Resume</a>
         </section>
-
-    <!-- Timetable section removed as requested -->
+        <section id="education">
+            <h2>Education</h2>
+            <ul>
+                <li>
+                    <strong>Bachelor of Technology (B.Tech), Computer Science</strong><br>
+                    <time datetime="2022-08">2022</time> – <time datetime="2026-06">2026</time><br>
+                    XYZ University
+                </li>
+            </ul>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript (ES6+)</li>
+                <li>Git &amp; GitHub</li>
+                <li>Responsive Web Design</li>
+                <li>React.js (basics)</li>
+            </ul>
+        </section>
+        <section id="projects" class="projects">
+            <h2>Projects</h2>
+            <article>
+                <h3>Portfolio Website</h3>
+                <p>A personal portfolio to showcase my skills, education, and projects. Built with semantic HTML5 and minimal CSS for accessibility and responsiveness.</p>
+            </article>
+            <article>
+                <h3>Project Placeholder</h3>
+                <p>More projects coming soon.</p>
+            </article>
+        </section>
+        <section>
+            <h2><a class="timetable-link" href="../time-table/index.html">Time-Table</a></h2>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <ul class="contact-list">
+                <li>Email: <a href="mailto:manas.kashyap@email.com">manas.kashyap@email.com</a></li>
+                <li>Phone: <a href="tel:+911234567890">+91 12345 67890</a></li>
+                <li>GitHub: <a href="#" target="_blank" rel="noopener">github.com/yourusername</a></li>
+                <li>LinkedIn: <a href="#" target="_blank" rel="noopener">linkedin.com/in/yourusername</a></li>
+            </ul>
+        </section>
     </main>
+    <footer>
+        <p>&copy; 2025 Manas Kashyap</p>
+    </footer>
 </body>
 </html>
