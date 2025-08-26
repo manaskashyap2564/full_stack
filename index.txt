@@ -7,4 +7,6 @@ Day - 1 (20th_Aug_25)
 Day - 1 (25th_Aug_25)
 - about-page with css selectors
 
-Day - 2 (26th_Aug_25)
+))))))Week-3
+Day - 1 (26th_Aug_25)
+- flexbox 
