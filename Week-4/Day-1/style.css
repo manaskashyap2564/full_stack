@@ -1,0 +1,84 @@
+body {
+	background: linear-gradient(135deg, #0f2027, #2c5364);
+	min-height: 100vh;
+}
+
+.hero-section {
+	min-height: 70vh;
+	background: transparent;
+	position:unset;
+	overflow: hidden;
+}
+
+.space-animation {
+	position: relative;
+	width: 350px;
+	height: 250px;
+	margin:0 auto;
+    padding: 50% auto;
+}
+
+.astronaut {
+	position:absolute;
+	left: 5px;
+	bottom: 10;
+	width: 150px;
+	animation: floatAstronaut 4s reverse infinite;
+	z-index: 2;
+}
+
+.rocket {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	width: 80px;
+	animation: rocketLaunch 3s linear infinite;
+	z-index: 2;
+}
+
+.space-bg {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 250px;
+	transform: translate(-50%, -50%);
+	opacity: 0.5;
+	z-index: 1;
+}
+
+@keyframes floatAstronaut {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-30px); }
+}
+
+@keyframes rocketLaunch {
+	0% { transform: translateY(0) rotate(-10deg); }
+	50% { transform: translateY(-40px) rotate(10deg); }
+	100% { transform: translateY(0) rotate(-10deg); }
+}
+
+.navbar-nav .nav-link {
+	transition: background 0.4s, color 0.4s, font-size 0.4s;
+	border-radius: 5px;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+	background: #1e3c72;
+	color: #ffd700 !important;
+	font-size: 1.1rem;
+}
+
+.card {
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+	transform: translateY(-10px) scale(1.03);
+	box-shadow: 0 8px 24px rgba(30,60,114,0.2);
+}
+
+footer {
+	background: #1e3c72;
+}
+
+carousel-inner{
+    size: 5px 1px ;
+}

@@ -1,0 +1,17 @@
+Week 4: Animations & Bootstrap Basics
+
+Objective: Create engaging, animated, and responsive UI.
+
+Scenario: Enhance a startup website's landing page with animation 
+
+Tasks:
+
+9. Generate an animation using astronaut, rocket, and space images.
+- Use keyframe CSS animation
+
+10. Add hover tarnsitions to navigate items.
+- Animate background, size, and color smoothly.
+
+11. Create a Botstrap-based landing page.
+- Use grid system, navbar, carousel, cards, and footer.
+- Output: Fully responsive landing page.
