@@ -1,4 +1,0 @@
-
-2. Create a timetable using <table>.
-   - Use <thead>, <tbody>, <tfoot>.
-   - Output: Neat academic timetable.
