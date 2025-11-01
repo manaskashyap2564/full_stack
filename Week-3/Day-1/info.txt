@@ -1,0 +1,14 @@
+Week 3: Layouts-Sidebar, Box Model & Flexbox
+
+Objective: Explore layout techniques, box model, and responsive design.
+Scenario: Build Ul components for blogs and e-commerce.
+
+Tasks:
+6. Create a sidebar using <div> and CSS
+-Ensure it is responsive
+7. Design a product card with image, description, and buy button.
+-Apply margis, padding, border, box-shadow.
+Output: Responsive e-commerce product card
+8. Build a biog layout with 3-column Flexbex
+Add media queries for mobile
+Output Responsive blog
