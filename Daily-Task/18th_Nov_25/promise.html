@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API call</title>
+        <link rel="icon" href="C:\Users\manas\Downloads\lawtonic_final_flowchart.png">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                text-align:center;
+            }
+            #container{
+                border:2px solid black;
+                margin-top:50px;
+                margin-left:600px;
+                margin-right:50px;
+                margin-bottom:50px;
+                height: 200px;
+                width: 300px;
+                /* margin:100px; */
+            }
+        </style>
+    </head>
+    <body>
+        <h6>Data call through promise</h6>
+        <div id = "container"></div>
+        <button onclick="getData()"> Get Data</button>
+        <div id="err">
+            Error Is Loading...
+        </div>
+        <script>
+            function getData() {
+                let api = "https://dummyjson.com/products/1";
+            let myPromise = new Promise((resolve,reject)=>{
+                fetch (api)
+                .then(res=> res.json())
+                .then(info=> resolve(info))
+                .catch(error=>reject(error))
+            })
+            myPromise
+            .then(key => {
+            document.getElementById('container').innerHTML = `
+                            <div class = "content">
+                            ${key.id}<br><br>
+                            ${key.title}<br><br>
+                            ${key.description}
+                            <div>
+                            `
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+            }
+            
+        </script>
+    </body>
+
+</html>

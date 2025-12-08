@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 21: Login Form with Fade Effects</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .main-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .welcome-container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .checkbox-group input {
+            width: auto;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .switch-form a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+        .welcome-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .welcome-container h2 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .welcome-container p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .logout-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Login Form -->
+        <div id="loginForm" class="form-container">
+            <h2>🔐 Login</h2>
+            <div class="error" id="loginError">Invalid credentials!</div>
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember">
+                    <label for="remember" style="margin: 0;">Remember me</label>
+                </div>
+                <button type="button" onclick="handleLogin()">Login</button>
+                <div class="links">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <div class="switch-form">
+                    Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="form-container" style="display: none;">
+            <h2>📝 Sign Up</h2>
+            <div class="error" id="signupError">Please fill all fields!</div>
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <button type="button" onclick="handleSignup()">Sign Up</button>
+                <div class="switch-form">
+                    Already have an account? <a href="#" onclick="showLogin()">Login</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="welcome-container">
+            <div class="welcome-icon">👋</div>
+            <h2>Welcome Back!</h2>
+            <p id="welcomeName">User Name</p>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // Task 21: Implement fade effects with .fadeIn() and .fadeOut()
+        
+        function showSignup() {
+            // TODO: Use .fadeOut() on login form and .fadeIn() on signup form
+            // Example:
+            // $('#loginForm').fadeOut(400, function() {
+            //     $('#signupForm').fadeIn(400);
+            // });
+            alert('🔨 Implement this using jQuery .fadeOut() and .fadeIn()');
+        }
+
+        function showLogin() {
+            // TODO: Use .fadeOut() on signup form and .fadeIn() on login form
+            alert('🔨 Implement this using jQuery .fadeOut() and .fadeIn()');
+        }
+
+        function handleLogin() {
+            const email = $('#loginEmail').val();
+            const password = $('#loginPassword').val();
+            
+            // Simple validation
+            if (!email || !password) {
+                // TODO: Show error with .fadeIn()
+                // $('#loginError').fadeIn();
+                alert('Please fill all fields');
+                return;
+            }
+
+            // Simulate successful login
+            const name = email.split('@')[0];
+            
+            // TODO: Implement fade transition to welcome screen
+            // $('#loginForm').fadeOut(400, function() {
+            //     $('#welcomeName').text(`Hello, ${name}!`);
+            //     $('#welcomeScreen').fadeIn(400);
+            // });
+            
+            alert('🔨 Implement login transition with fade effects');
+        }
+
+        function handleSignup() {
+            const name = $('#signupName').val();
+            const email = $('#signupEmail').val();
+            const password = $('#signupPassword').val();
+            
+            if (!name || !email || !password) {
+                // TODO: Show error
+                alert('Please fill all fields');
+                return;
+            }
+
+            // TODO: Implement fade transition to welcome screen
+            alert('🔨 Implement signup transition with fade effects');
+        }
+
+        function handleLogout() {
+            // TODO: Fade back to login form
+            // $('#welcomeScreen').fadeOut(400, function() {
+            //     $('#loginForm').fadeIn(400);
+            //     $('#loginEmail').val('');
+            //     $('#loginPassword').val('');
+            // });
+            alert('🔨 Implement logout with fade effects');
+        }
+
+        // Hide errors when user starts typing
+        $(document).ready(function() {
+            $('input').on('input', function() {
+                $('.error').fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>

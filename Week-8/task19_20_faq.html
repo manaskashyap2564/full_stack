@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 19 & 20: FAQ with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .controls button {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn-purple { background: #667eea; color: white; }
+        .btn-pink { background: #f093fb; color: white; }
+        .btn-blue { background: #4facfe; color: white; }
+        .btn-green { background: #43e97b; color: white; }
+        
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .faq-question {
+            padding: 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        .faq-question.active {
+            background: #667eea;
+            color: white;
+        }
+        .icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+        .faq-question.active .icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 20px;
+            background: white;
+            display: none;
+            line-height: 1.6;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❓ Frequently Asked Questions</h1>
+        <p class="subtitle">Click on a question to see the answer</p>
+        
+        <div class="controls">
+            <button class="btn-purple" onclick="changeColors()">Task 20: Change Colors</button>
+            <button class="btn-pink" onclick="changeFontSize()">Increase Font</button>
+            <button class="btn-blue" onclick="resetStyles()">Reset Styles</button>
+            <button class="btn-green" onclick="expandAll()">Expand All</button>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is jQuery?</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, and animation much simpler with an easy-to-use API that works across multiple browsers.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I include jQuery in my project?</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    You can include jQuery by downloading it from jquery.com or by using a CDN link in your HTML file. Add the script tag in the head section: &lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is .slideToggle()?</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    The .slideToggle() method displays or hides the matched elements with a sliding motion. It's a combination of .slideDown() and .slideUp(). When called on visible elements, they slide up, and on hidden elements, they slide down.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is the .css() method?</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    The .css() method is used to get or set CSS properties of elements. You can set a single property like .css('color', 'red') or multiple properties using an object like .css({'color': 'red', 'font-size': '20px'}).
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Why use jQuery instead of vanilla JavaScript?</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    jQuery simplifies DOM manipulation, event handling, and AJAX calls. It provides cross-browser compatibility and reduces the amount of code needed for common tasks. However, modern JavaScript (ES6+) has closed the gap with features like querySelector and fetch API.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Task 19: Implement FAQ toggle with .slideToggle()
+        $(document).ready(function() {
+            // TODO: Add click event to .faq-question
+            // Use .slideToggle() on .faq-answer
+            // Toggle 'active' class on .faq-question
+            
+            // Example implementation:
+            // $('.faq-question').click(function() {
+            //     $(this).toggleClass('active');
+            //     $(this).next('.faq-answer').slideToggle(400);
+            // });
+        });
+
+        // Task 20: Dynamic styling with .css() method
+        function changeColors() {
+            // TODO: Use .css() to change colors dynamically
+            // Example:
+            // $('.faq-question').css({
+            //     'background-color': '#' + Math.floor(Math.random()*16777215).toString(16),
+            //     'transition': 'all 0.5s'
+            // });
+            alert('🔨 Implement this using jQuery .css() method');
+        }
+
+        function changeFontSize() {
+            // TODO: Increase font size using .css()
+            // $('.faq-answer').css('font-size', '18px');
+            alert('🔨 Implement this using jQuery .css() method');
+        }
+
+        function resetStyles() {
+            // TODO: Reset all styles
+            alert('🔨 Implement reset functionality');
+        }
+
+        function expandAll() {
+            // TODO: Expand all FAQ items using .slideDown()
+            // $('.faq-answer').slideDown();
+            // $('.faq-question').addClass('active');
+            alert('🔨 Implement expand all functionality');
+        }
+    </script>
+</body>
+</html>

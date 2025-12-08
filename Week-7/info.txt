@@ -1,0 +1,11 @@
+Week 7: Event Handling, Gallery & Async JS
+
+Objective: Work with events, delegation, and async handling.
+Scenario: Build apps with user interaction and data fetching simulation.
+
+Tasks:
+17. Implement a gallery: clicking a thumbnail updates the main image.
+    - Use addEventListener() and event delegation.
+18. Simulate fetching data using setTimeout() and Promises.
+    - Display data after delay.
+    - Output: Simulated server response.

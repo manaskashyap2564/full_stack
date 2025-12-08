@@ -1,0 +1,12 @@
+Week 12: Props, Custom Components & State Management
+
+Objective: Learn about props, building reusable components, and managing state.
+Scenario: Developing a product catalog for an e-commerce site.
+
+Tasks:
+28. Create a custom reusable Card component (image, title, description).
+    - Use props to pass data into the component.
+    - Output: Multiple cards displaying different products.
+29. Build a form component with controlled inputs (name, email, message).
+    - Manage form data using useState().
+    - Output: Form values displayed below after submission.

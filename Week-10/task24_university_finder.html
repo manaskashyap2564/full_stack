@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 24: University Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .search-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+        .search-box {
+            display: flex;
+            gap: 15px;
+        }
+        #countryInput {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: border-color 0.3s;
+        }
+        #countryInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .search-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .search-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .suggestions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .suggestion-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .suggestion-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .loading {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .results-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .results-header h2 {
+            color: #333;
+            font-size: 28px;
+        }
+        .results-count {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .university-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .university-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-left-color: #764ba2;
+        }
+        .university-card h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .university-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+        .info-item span {
+            font-weight: bold;
+        }
+        .website-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .website-link:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .error-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .error-message h3 {
+            color: #f5576c;
+            margin-bottom: 10px;
+        }
+        .error-message p {
+            color: #666;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 University Finder</h1>
+            <p>Search for universities around the world</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="countryInput" 
+                    placeholder="Enter country name (e.g., United States, India, Canada)..."
+                    onkeypress="if(event.key==='Enter') searchUniversities()"
+                >
+                <button class="search-btn" id="searchBtn" onclick="searchUniversities()">
+                    🔍 Search
+                </button>
+            </div>
+            <div class="suggestions">
+                <span style="color: #666; font-size: 14px;">Try:</span>
+                <button class="suggestion-btn" onclick="fillCountry('United States')">United States</button>
+                <button class="suggestion-btn" onclick="fillCountry('India')">India</button>
+                <button class="suggestion-btn" onclick="fillCountry('United Kingdom')">United Kingdom</button>
+                <button class="suggestion-btn" onclick="fillCountry('Canada')">Canada</button>
+                <button class="suggestion-btn" onclick="fillCountry('Australia')">Australia</button>
+                <button class="suggestion-btn" onclick="fillCountry('Germany')">Germany</button>
+            </div>
+        </div>
+
+        <div id="resultsArea">
+            <div class="empty-state">
+                <div class="empty-icon">🌍</div>
+                <h3>Start Your Search</h3>
+                <p>Enter a country name above to find universities</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fillCountry(country) {
+            document.getElementById('countryInput').value = country;
+            searchUniversities();
+        }
+
+        async function searchUniversities() {
+            const countryInput = document.getElementById('countryInput');
+            const country = countryInput.value.trim();
+            const resultsArea = document.getElementById('resultsArea');
+            const searchBtn = document.getElementById('searchBtn');
+
+            if (!country) {
+                alert('Please enter a country name!');
+                return;
+            }
+
+            // Show loading state
+            searchBtn.disabled = true;
+            searchBtn.textContent = '⏳ Searching...';
+            resultsArea.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <h3>Searching universities in ${country}...</h3>
+                    <p>Please wait</p>
+                </div>
+            `;
+
+            try {
+                // TODO: Fetch data from API
+                const apiUrl = `http://universities.hipolabs.com/search?country=${encodeURIComponent(country)}`;
+                
+                // Example implementation:
+                // const response = await fetch(apiUrl);
+                // if (!response.ok) {
+                //     throw new Error('Failed to fetch data');
+                // }
+                // const universities = await response.json();
+                
+                // if (universities.length === 0) {
+                //     showNoResults(country);
+                // } else {
+                //     displayResults(universities, country);
+                // }
+
+                // Placeholder - Remove this and implement actual fetch
+                setTimeout(() => {
+                    resultsArea.innerHTML = `
+                        <div class="error-message">
+                            <div class="error-icon">🔨</div>
+                            <h3>Implementation Required</h3>
+                            <p>Implement the fetch API call to retrieve university data</p>
+                            <p style="margin-top: 15px; font-size: 14px;">
+                                API: <code>${apiUrl}</code>
+                            </p>
+                        </div>
+                    `;
+                    searchBtn.disabled = false;
+                    searchBtn.textContent = '🔍 Search';
+                }, 1000);
+
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function displayResults(universities, country) {
+            const resultsArea = document.getElementById('resultsArea');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            // TODO: Display universities in grid format
+            // Create cards for each university showing:
+            // - University name
+            // - State/Province (if available)
+            // - Website link(s)
+            
+            let html = `
+                <div class="results-container">
+                    <div class="results-header">
+                        <h2>Universities in ${country}</h2>
+                        <span class="results-count">${universities.length} found</span>
+                    </div>
+                    <div class="university-grid">
+            `;
+
+            universities.forEach(uni => {
+                const state = uni['state-province'] || 'N/A';
+                const websites = uni.web_pages || [];
+                
+                html += `
+                    <div class="university-card">
+                        <h3>${uni.name}</h3>
+                        <div class="university-info">
+                            <div class="info-item">
+                                <span>📍</span>
+                                <span>State:</span> ${state}
+                            </div>
+                            <div class="info-item">
+                                <span>🌐</span>
+                                <span>Website:</span>
+                                ${websites.length > 0 
+                                    ? `<a href="${websites[0]}" target="_blank" class="website-link">${websites[0]}</a>`
+                                    : 'N/A'
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            resultsArea.innerHTML = html;
+            searchBtn.disabled = false;
+            searchBtn.textContent = '🔍 Search';
+        }
+
+        function showNoResults(country) {
+            const resultsArea = document.getElementById('resultsArea');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            resultsArea.innerHTML = `
+                <div class="error-message">
+                    <div class="error-icon">😕</div>
+                    <h3>No Universities Found</h3>
+                    <p>We couldn't find any universities in "${country}"</p>
+                    <p style="margin-top: 10px; color: #999;">Try checking the spelling or try a different country</p>
+                </div>
+            `;
+            
+            searchBtn.disabled = false;
+            searchBtn.textContent = '🔍 Search';
+        }
+
+        function showError(message) {
+            const resultsArea = document.getElementById('resultsArea');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            resultsArea.innerHTML = `
+                <div class="error-message">
+                    <div class="error-icon">❌</div>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+            
+            searchBtn.disabled = false;
+            searchBtn.textContent = '🔍 Search';
+        }
+    </script>
+</body>
+</html>

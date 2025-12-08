@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 13: Age Eligibility Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #f5576c;
+            text-align: center;
+        }
+        .form-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-if-else {
+            background: #667eea;
+            color: white;
+        }
+        .btn-ternary {
+            background: #f093fb;
+            color: white;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .eligible {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .not-eligible {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎂 Age Eligibility Checker</h1>
+        <p style="text-align: center; color: #666;">Check if you're eligible (Age ≥ 18)</p>
+        
+        <div class="form-group">
+            <label for="age">Enter Your Age:</label>
+            <input type="number" id="age" placeholder="e.g., 21" min="0" max="120">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-if-else" onclick="checkEligibilityIfElse()">Check (if-else)</button>
+            <button class="btn-ternary" onclick="checkEligibilityTernary()">Check (Ternary)</button>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function checkEligibilityIfElse() {
+            // TODO: Get age from input
+            // TODO: Use if-else to check eligibility
+            // TODO: Display result
+            
+            const age = parseInt(document.getElementById('age').value);
+            const resultDiv = document.getElementById('result');
+            
+            if (isNaN(age) || age < 0) {
+                resultDiv.className = 'result not-eligible';
+                resultDiv.textContent = '⚠️ Please enter a valid age!';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            // Implement if-else logic here
+            // if (age >= 18) {
+            //     resultDiv.className = 'result eligible';
+            //     resultDiv.textContent = `✅ You are eligible! (Age: ${age})`;
+            // } else {
+            //     resultDiv.className = 'result not-eligible';
+            //     resultDiv.textContent = `❌ You are not eligible. (Age: ${age})`;
+            // }
+            // resultDiv.style.display = 'block';
+        }
+
+        function checkEligibilityTernary() {
+            // TODO: Get age from input
+            // TODO: Use ternary operator to check eligibility
+            // TODO: Display result
+            
+            const age = parseInt(document.getElementById('age').value);
+            const resultDiv = document.getElementById('result');
+            
+            if (isNaN(age) || age < 0) {
+                resultDiv.className = 'result not-eligible';
+                resultDiv.textContent = '⚠️ Please enter a valid age!';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            // Implement ternary operator logic here
+            // const message = age >= 18 
+            //     ? `✅ You are eligible! (Age: ${age})` 
+            //     : `❌ You are not eligible. (Age: ${age})`;
+            // resultDiv.className = age >= 18 ? 'result eligible' : 'result not-eligible';
+            // resultDiv.textContent = message;
+            // resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

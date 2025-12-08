@@ -1,0 +1,8 @@
+Week 10: APIs & Capstone Projects
+
+Objective: Fetch and display data using APIs.
+Scenario: Build real-world API-driven apps.
+
+Tasks:
+24. Create a website where the user enters a country name and sees universities with their names, websites, and states (using fetch API).
+    - API: http://universities.hipolabs.com/search?country=

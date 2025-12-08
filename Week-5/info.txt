@@ -1,0 +1,9 @@
+Week 5: Introduction to JavaScript & Arrays
+
+Objective: Learn basics of JS variables, conditions, and arrays.
+Scenario: Build interactive beginner-level applications.
+
+Tasks:
+12. Write a script where the user enters their name and sees a welcome message using prompt(), alert(), and document.write().
+13. Build an eligibility checker (age ≥ 18) using if-else and ternary operator.
+14. Practice array methods (map, filter, reduce, forEach) with problem-solving tasks.

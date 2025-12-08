@@ -1,0 +1,15 @@
+Week 11: Introduction to React & Components
+
+Objective: Understand the fundamentals of React, JSX, and components.
+Scenario: Building the front-end of a startup's profile application.
+
+Tasks:
+25. Setup a React project using Vite or Create React App.
+    - Output: Working React environment.
+26. Create your first React component (HelloWorld).
+    - Output: Display a simple 'Hello World' using JSX.
+27. Explore JSX & Babel:
+    - Write JSX expressions with variables and functions.
+    - Output: Dynamic greetings using JSX.
+
+Note: A React project has already been set up in reactTutorial/reactapp/

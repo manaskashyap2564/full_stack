@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .balance-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .balance-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+        }
+
+        .balance-card h3 {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .balance-card p {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .income {
+            color: #28a745 !important;
+        }
+
+        .expense {
+            color: #dc3545 !important;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .transactions-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .transactions-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .transaction-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .transaction-item:hover {
+            transform: translateX(5px);
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .transaction-info p {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .transaction-amount {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .transaction-amount.income {
+            color: #28a745;
+        }
+
+        .transaction-amount.expense {
+            color: #dc3545;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .chart-section {
+            grid-column: 1 / -1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .chart-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #6c757d;
+            padding: 40px;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .balance-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Expense Tracker</h1>
+            <p>Track your income and expenses efficiently</p>
+        </div>
+
+        <div class="balance-section">
+            <div class="balance-card">
+                <h3>Total Balance</h3>
+                <p id="totalBalance">₹0.00</p>
+            </div>
+            <div class="balance-card">
+                <h3>Total Income</h3>
+                <p class="income" id="totalIncome">₹0.00</p>
+            </div>
+            <div class="balance-card">
+                <h3>Total Expenses</h3>
+                <p class="expense" id="totalExpense">₹0.00</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <h2>Add Transaction</h2>
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" placeholder="Enter description" required>
+                        <span class="error" id="descError">Description is required</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" placeholder="Enter amount" step="0.01" required>
+                        <span class="error" id="amountError">Please enter a valid amount</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error" id="categoryError">Please select a category</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" required>
+                            <option value="">Select type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                        <span class="error" id="typeError">Please select a type</span>
+                    </div>
+
+                    <button type="submit" class="btn">Add Transaction</button>
+                </form>
+            </div>
+
+            <div class="transactions-section">
+                <h2>Recent Transactions</h2>
+                <div class="transaction-list" id="transactionList">
+                    <div class="empty-state">
+                        <p>📝 No transactions yet. Add your first transaction!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h2>Expense Distribution by Category</h2>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ES6 Features: Destructuring, Spread Operator, Arrow Functions
+        class ExpenseTracker {
+            constructor() {
+                this.transactions = this.loadTransactions();
+                this.chart = null;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.updateDisplay();
+                this.renderTransactions();
+                this.updateChart();
+            }
+
+            setupEventListeners() {
+                const form = document.getElementById('transactionForm');
+                form.addEventListener('submit', (e) => this.handleSubmit(e));
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                
+                // Form validation
+                if (!this.validateForm()) {
+                    return;
+                }
+
+                // ES6 Destructuring
+                const { description, amount, category, type } = this.getFormData();
+
+                // Create transaction object
+                const transaction = {
+                    id: Date.now(),
+                    description: description.trim(),
+                    amount: parseFloat(amount),
+                    category,
+                    type,
+                    date: new Date().toLocaleDateString('en-IN')
+                };
+
+                // ES6 Spread Operator
+                this.transactions = [...this.transactions, transaction];
+                this.saveTransactions();
+                this.updateDisplay();
+                this.renderTransactions();
+                this.updateChart();
+                this.resetForm();
+            }
+
+            getFormData() {
+                return {
+                    description: document.getElementById('description').value,
+                    amount: document.getElementById('amount').value,
+                    category: document.getElementById('category').value,
+                    type: document.getElementById('type').value
+                };
+            }
+
+            validateForm() {
+                const { description, amount, category, type } = this.getFormData();
+                let isValid = true;
+
+                // Reset errors
+                document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+
+                if (!description.trim()) {
+                    document.getElementById('descError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!amount || parseFloat(amount) <= 0) {
+                    document.getElementById('amountError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!category) {
+                    document.getElementById('categoryError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (!type) {
+                    document.getElementById('typeError').style.display = 'block';
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            calculateTotals() {
+                // ES6 Array methods with destructuring
+                const income = this.transactions
+                    .filter(({ type }) => type === 'income')
+                    .reduce((sum, { amount }) => sum + amount, 0);
+
+                const expense = this.transactions
+                    .filter(({ type }) => type === 'expense')
+                    .reduce((sum, { amount }) => sum + amount, 0);
+
+                const balance = income - expense;
+
+                return { income, expense, balance };
+            }
+
+            updateDisplay() {
+                const { income, expense, balance } = this.calculateTotals();
+
+                document.getElementById('totalBalance').textContent = `₹${balance.toFixed(2)}`;
+                document.getElementById('totalIncome').textContent = `₹${income.toFixed(2)}`;
+                document.getElementById('totalExpense').textContent = `₹${expense.toFixed(2)}`;
+            }
+
+            renderTransactions() {
+                const listContainer = document.getElementById('transactionList');
+                
+                if (this.transactions.length === 0) {
+                    listContainer.innerHTML = `
+                        <div class="empty-state">
+                            <p>📝 No transactions yet. Add your first transaction!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // ES6 Spread operator to reverse array without mutating
+                const sortedTransactions = [...this.transactions].reverse();
+
+                listContainer.innerHTML = sortedTransactions.map(({ id, description, amount, category, type, date }) => `
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>${description}</h4>
+                            <p>${category} • ${date}</p>
+                        </div>
+                        <span class="transaction-amount ${type}">
+                            ${type === 'income' ? '+' : '-'}₹${amount.toFixed(2)}
+                        </span>
+                        <button class="delete-btn" onclick="tracker.deleteTransaction(${id})">Delete</button>
+                    </div>
+                `).join('');
+            }
+
+            deleteTransaction(id) {
+                // ES6 filter with confirmation
+                if (confirm('Are you sure you want to delete this transaction?')) {
+                    this.transactions = this.transactions.filter(transaction => transaction.id !== id);
+                    this.saveTransactions();
+                    this.updateDisplay();
+                    this.renderTransactions();
+                    this.updateChart();
+                }
+            }
+
+            updateChart() {
+                const canvas = document.getElementById('expenseChart');
+                const ctx = canvas.getContext('2d');
+
+                // Get expense data by category
+                const expensesByCategory = this.transactions
+                    .filter(({ type }) => type === 'expense')
+                    .reduce((acc, { category, amount }) => {
+                        acc[category] = (acc[category] || 0) + amount;
+                        return acc;
+                    }, {});
+
+                // ES6 Destructuring in Object.entries
+                const labels = Object.keys(expensesByCategory);
+                const data = Object.values(expensesByCategory);
+
+                // Destroy previous chart if exists
+                if (this.chart) {
+                    this.chart.destroy();
+                }
+
+                // Create new chart
+                this.chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels,
+                        datasets: [{
+                            data,
+                            backgroundColor: [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56',
+                                '#4BC0C0',
+                                '#9966FF',
+                                '#FF9F40',
+                                '#FF6384'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed || 0;
+                                        return `${label}: ₹${value.toFixed(2)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            saveTransactions() {
+                localStorage.setItem('transactions', JSON.stringify(this.transactions));
+            }
+
+            loadTransactions() {
+                const data = localStorage.getItem('transactions');
+                return data ? JSON.parse(data) : [];
+            }
+
+            resetForm() {
+                document.getElementById('transactionForm').reset();
+            }
+        }
+
+        // Initialize the app
+        const tracker = new ExpenseTracker();
+    </script>
+</body>
+</html>

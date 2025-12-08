@@ -1,16 +1,115 @@
-))))))Week-1
-Day - 1 (20th_Aug_25)
-1. time-table
-2. portfolio
+# Full Stack Scripting Technologies Lab Manual
+# Updated: December 8, 2025
 
-))))))Week-2
-Day - 1 (25th_Aug_25)
-- about-page with css selectors
+========================================
+📚 QUICK START GUIDE
+========================================
 
-))))))Week-3
-Day - 1 (26th_Aug_25)
-- flexbox 
+1. View overall progress: README.md
+2. Complete task index: LAB_MANUAL_INDEX.md
+3. Setup completion: SETUP_COMPLETE.md
 
-))))))Week-4
-Day - 1 (27th_Aug_25)
-- 
+========================================
+📂 DIRECTORY STRUCTURE
+========================================
+
+Week-1/  ✅ HTML Foundations (Tasks 1-2) COMPLETE
+Week-2/  ✅ CSS Selectors (Tasks 3-5) PARTIAL
+Week-3/  ✅ Layouts & Flexbox (Tasks 6-8) PARTIAL
+Week-4/  ⚠️  Animations & Bootstrap (Tasks 9-11) PARTIAL
+Week-5/  🆕 JavaScript Basics (Tasks 12-14) NEW!
+Week-6/  ⚠️  Functions & DOM (Tasks 15-16) PARTIAL
+Week-7/  🆕 Events & Async JS (Tasks 17-18) NEW!
+Week-8/  🆕 jQuery (Tasks 19-21) NEW!
+Week-9/  🆕 Advanced DOM (Tasks 22-23) NEW!
+Week-10/ 🆕 APIs (Task 24) NEW!
+Week-11/ 🆕 React Intro (Tasks 25-27) NEW!
+Week-12/ 🆕 React Props/State (Tasks 28-29) NEW!
+Week-13/ 🆕 React Routing (Task 30) NEW!
+
+========================================
+✅ COMPLETED TASKS (6/30 - 20%)
+========================================
+
+✓ Task 1: Personal Portfolio (Week-1/Day-1/portfolio/)
+✓ Task 2: Academic Timetable (Week-1/Day-1/time-table/)
+✓ Task 3: About Us Page (Week-2/Day-1/)
+✓ Task 8: Flexbox Blog (Week-3/Day-1/)
+✓ Task 25: React Setup (reactTutorial/reactapp/)
+
+========================================
+🆕 NEW TEMPLATES READY (15/30 - 50%)
+========================================
+
+JavaScript Basics (Week 5):
+→ Task 12: week-5/task12_welcome.html
+→ Task 13: week-5/task13_eligibility.html
+→ Task 14: week-5/task14_array_methods.html
+
+Event Handling (Week 7):
+→ Task 17: week-7/task17_gallery.html
+→ Task 18: week-7/task18_async.html
+
+jQuery (Week 8):
+→ Task 19-20: week-8/task19_20_faq.html
+→ Task 21: week-8/task21_login_form.html
+
+Advanced DOM (Week 9):
+→ Task 22: week-9/task22_advanced_todo.html
+→ Task 23: week-9/task23_chessboard.html
+
+APIs (Week 10):
+→ Task 24: week-10/task24_university_finder.html
+
+React (Weeks 11-13):
+→ Tasks 26-27: Week-11/TASKS_25_26_27.md
+→ Tasks 28-29: Week-12/TASKS_28_29.md
+→ Task 30: Week-13/TASK_30.md
+
+========================================
+⚠️  NEEDS VERIFICATION (7/30 - 23%)
+========================================
+
+→ Task 4: Movie List (Week 2)
+→ Task 5: City List (Week 2)
+→ Task 6: Sidebar (Week 3)
+→ Task 7: Product Card (Week 3)
+→ Task 9: Space Animation (Week 4)
+→ Task 10: Nav Hover (Week 4)
+→ Task 16: To-Do List (Week 6)
+
+========================================
+❌ NOT STARTED (2/30 - 7%)
+========================================
+
+→ Task 11: Bootstrap Landing Page (Week 4)
+→ Task 15: Function/Closure Problems (Week 6)
+
+========================================
+🚀 QUICK COMMANDS
+========================================
+
+View tasks in browser:
+  Open any .html file in your browser
+
+Run React app:
+  cd reactTutorial/reactapp
+  npm install
+  npm run dev
+
+========================================
+📊 PROGRESS SUMMARY
+========================================
+
+Total Tasks: 30
+Completed: 6 (20%)
+Template Ready: 15 (50%)
+Needs Work: 7 (23%)
+Not Started: 2 (7%)
+
+Progress Bar: [████████░░░░░░░░░░░░] 40% overall
+
+========================================
+
+Last Updated: December 8, 2025
+All new templates include professional styling and hints! 

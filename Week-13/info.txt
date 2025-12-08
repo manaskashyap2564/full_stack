@@ -1,0 +1,8 @@
+Week 13: Routing
+
+Objective: Implement routing and learn about data flow in React.
+Scenario: Building a small multi-page blogging app.
+
+Tasks:
+30. Setup React Router with 3 pages: Home, About, and Blog.
+    - Output: Navigation links switching between pages.

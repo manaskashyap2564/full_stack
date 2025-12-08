@@ -1,0 +1,10 @@
+Week 8: jQuery Interactivity
+
+Objective: Learn jQuery basics, DOM manipulation, and effects.
+Scenario: Add smooth effects to improve UI.
+
+Tasks:
+19. Build an FAQ section with toggle effect using .slideToggle().
+20. Style dynamically with .css() method.
+21. Create a login form with fade-in animation using .fadeIn() and .fadeOut().
+    - Output: Smooth, interactive forms.

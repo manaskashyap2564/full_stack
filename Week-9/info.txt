@@ -1,0 +1,12 @@
+Week 9: Advanced DOM Applications
+
+Objective: Build interactive apps dynamically.
+Scenario: Create applications with real-world UI logic.
+
+Tasks:
+22. Extend To-Do list with:
+    - Move up, move down, delete, and checkbox options.
+    - Output: Feature-rich To-Do app.
+23. Generate a chessboard using loops in JavaScript.
+    - Apply CSS styles dynamically via JS.
+    - Output: Interactive chessboard grid.

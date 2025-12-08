@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 17: Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .main-image-container {
+            width: 100%;
+            height: 500px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #667eea;
+        }
+        #mainImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        #mainImage:hover {
+            transform: scale(1.05);
+        }
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        .thumbnail {
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .thumbnail:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .thumbnail.active {
+            border-color: #764ba2;
+            box-shadow: 0 0 20px rgba(118, 75, 162, 0.5);
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-style: italic;
+        }
+        .placeholder {
+            color: #999;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Image Gallery with Event Delegation</h1>
+        
+        <div class="main-image-container">
+            <img id="mainImage" src="https://via.placeholder.com/800x500/667eea/ffffff?text=Click+a+thumbnail" alt="Main Image">
+        </div>
+        
+        <div class="image-info" id="imageInfo">
+            Select a thumbnail to view the image
+        </div>
+        
+        <div class="thumbnails" id="thumbnailContainer">
+            <!-- Thumbnails will be dynamically added here -->
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/FF6B6B/ffffff?text=Sunset+Beach" data-title="Sunset Beach">
+                <img src="https://via.placeholder.com/150/FF6B6B/ffffff?text=1" alt="Thumbnail 1">
+            </div>
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/4ECDC4/ffffff?text=Mountain+View" data-title="Mountain View">
+                <img src="https://via.placeholder.com/150/4ECDC4/ffffff?text=2" alt="Thumbnail 2">
+            </div>
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/45B7D1/ffffff?text=Ocean+Waves" data-title="Ocean Waves">
+                <img src="https://via.placeholder.com/150/45B7D1/ffffff?text=3" alt="Thumbnail 3">
+            </div>
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/F7B731/ffffff?text=Desert+Dunes" data-title="Desert Dunes">
+                <img src="https://via.placeholder.com/150/F7B731/ffffff?text=4" alt="Thumbnail 4">
+            </div>
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/5F27CD/ffffff?text=Northern+Lights" data-title="Northern Lights">
+                <img src="https://via.placeholder.com/150/5F27CD/ffffff?text=5" alt="Thumbnail 5">
+            </div>
+            <div class="thumbnail" data-image="https://via.placeholder.com/800x500/00D2D3/ffffff?text=Tropical+Forest" data-title="Tropical Forest">
+                <img src="https://via.placeholder.com/150/00D2D3/ffffff?text=6" alt="Thumbnail 6">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement event delegation on thumbnailContainer
+        // Hint: Add single event listener to parent container
+        // Use event.target to identify which thumbnail was clicked
+        
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+        const mainImage = document.getElementById('mainImage');
+        const imageInfo = document.getElementById('imageInfo');
+
+        // Event delegation example:
+        // thumbnailContainer.addEventListener('click', function(event) {
+        //     // Check if clicked element is a thumbnail
+        //     const thumbnail = event.target.closest('.thumbnail');
+        //     if (!thumbnail) return;
+        //     
+        //     // Get data attributes
+        //     const newImageSrc = thumbnail.dataset.image;
+        //     const imageTitle = thumbnail.dataset.title;
+        //     
+        //     // Update main image
+        //     mainImage.src = newImageSrc;
+        //     imageInfo.textContent = imageTitle;
+        //     
+        //     // Update active state
+        //     document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+        //     thumbnail.classList.add('active');
+        // });
+
+        // TODO: Implement your solution here
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 14: Array Methods Practice</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        .container {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #0f4c75;
+        }
+        h1 {
+            color: #3282b8;
+            text-align: center;
+        }
+        .exercise {
+            background: #0f3460;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3282b8;
+        }
+        .exercise h3 {
+            color: #bbe1fa;
+            margin-top: 0;
+        }
+        button {
+            background: #3282b8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0f4c75;
+        }
+        .output {
+            background: #0a0e27;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            min-height: 30px;
+            border: 1px solid #3282b8;
+        }
+        code {
+            color: #ffd93d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Array Methods Practice</h1>
+        <p style="text-align: center;">Master map(), filter(), reduce(), and forEach()</p>
+
+        <div class="exercise">
+            <h3>Exercise 1: map() - Double the Numbers</h3>
+            <p>Given array: <code>[1, 2, 3, 4, 5]</code></p>
+            <p>Task: Use <code>.map()</code> to create a new array with doubled values.</p>
+            <button onclick="exercise1()">Run Exercise 1</button>
+            <div id="output1" class="output"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>Exercise 2: filter() - Get Even Numbers</h3>
+            <p>Given array: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
+            <p>Task: Use <code>.filter()</code> to get only even numbers.</p>
+            <button onclick="exercise2()">Run Exercise 2</button>
+            <div id="output2" class="output"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>Exercise 3: reduce() - Sum of Array</h3>
+            <p>Given array: <code>[10, 20, 30, 40, 50]</code></p>
+            <p>Task: Use <code>.reduce()</code> to calculate the sum.</p>
+            <button onclick="exercise3()">Run Exercise 3</button>
+            <div id="output3" class="output"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>Exercise 4: forEach() - Print Each Element</h3>
+            <p>Given array: <code>['Apple', 'Banana', 'Cherry', 'Date']</code></p>
+            <p>Task: Use <code>.forEach()</code> to print each element with its index.</p>
+            <button onclick="exercise4()">Run Exercise 4</button>
+            <div id="output4" class="output"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>Exercise 5: Chaining - Complex Operations</h3>
+            <p>Given array: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
+            <p>Task: Filter even numbers, square them, then sum the result.</p>
+            <button onclick="exercise5()">Run Exercise 5</button>
+            <div id="output5" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function exercise1() {
+            // TODO: Implement map() to double numbers
+            const numbers = [1, 2, 3, 4, 5];
+            // const doubled = numbers.map(num => num * 2);
+            // document.getElementById('output1').textContent = `Original: [${numbers}]\nDoubled: [${doubled}]`;
+            document.getElementById('output1').textContent = '🔨 Implement this using .map()';
+        }
+
+        function exercise2() {
+            // TODO: Implement filter() to get even numbers
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            // const evens = numbers.filter(num => num % 2 === 0);
+            // document.getElementById('output2').textContent = `Original: [${numbers}]\nEven Numbers: [${evens}]`;
+            document.getElementById('output2').textContent = '🔨 Implement this using .filter()';
+        }
+
+        function exercise3() {
+            // TODO: Implement reduce() to sum array
+            const numbers = [10, 20, 30, 40, 50];
+            // const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+            // document.getElementById('output3').textContent = `Numbers: [${numbers}]\nSum: ${sum}`;
+            document.getElementById('output3').textContent = '🔨 Implement this using .reduce()';
+        }
+
+        function exercise4() {
+            // TODO: Implement forEach() to print elements
+            const fruits = ['Apple', 'Banana', 'Cherry', 'Date'];
+            let output = '';
+            // fruits.forEach((fruit, index) => {
+            //     output += `${index}: ${fruit}\n`;
+            // });
+            // document.getElementById('output4').textContent = output;
+            document.getElementById('output4').textContent = '🔨 Implement this using .forEach()';
+        }
+
+        function exercise5() {
+            // TODO: Chain filter, map, and reduce
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            // const result = numbers
+            //     .filter(num => num % 2 === 0)  // Get evens: [2,4,6,8,10]
+            //     .map(num => num * num)          // Square them: [4,16,36,64,100]
+            //     .reduce((acc, curr) => acc + curr, 0); // Sum: 220
+            // document.getElementById('output5').textContent = 
+            //     `Even numbers: ${numbers.filter(n => n % 2 === 0)}\n` +
+            //     `Squared: ${numbers.filter(n => n % 2 === 0).map(n => n * n)}\n` +
+            //     `Sum: ${result}`;
+            document.getElementById('output5').textContent = '🔨 Implement this using chaining';
+        }
+    </script>
+</body>
+</html>

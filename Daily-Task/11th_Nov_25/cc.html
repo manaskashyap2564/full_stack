@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Practice Page</title>
+        <style> 
+            *{
+                padding:0;
+                margin:0;
+                text-align:center;
+            }
+            #container{
+                border:2px solid black;
+                border-top-color:rebeccapurple;
+                border-bottom-color:greenyellow;
+                height:200px;
+                width:300px;
+                margin-top:5px;
+                margin-left:160px;
+            }
+            .content{
+                font-size:20px;
+                font-weight:bold;
+                color:blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h3 class="head">Getting Data through javascript</h3>
+        <div id="container">test</div>
+        <button class="btn" onclick="getText()">Click Me</button>
+        <script>
+            let name ="GLA University"
+            let add ="Mathura"
+            let age ="28"
+            let text="working on"
+            function getText() {
+            let content =`
+                <div class="content">
+                
+                <u>${name}</u><br>
+                ${add}<br>
+                ${age}<br>
+                ${text}<br>
+                
+                </div>
+            `
+            }
+           
+            document.getElementById("container").innerHTML = content;
+            async function getText() {
+                try{
+                    let api= await fetch("https://jsonplaceholder.typicode.com/users")
+                    let data =await api.json()
+                }catch(error){
+                    console.log("Error:", error);
+                }
+            }
+
+
+        </script>
+
+    </body>
+</html>
