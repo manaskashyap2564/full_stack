@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 15: Functions, Closures & IIFE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #3282b8;
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .subtitle {
+            text-align: center;
+            color: #bbe1fa;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .exercise {
+            background: #0f3460;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #3282b8;
+            transition: all 0.3s;
+        }
+        .exercise:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+            border-left-color: #bbe1fa;
+        }
+        .exercise h3 {
+            color: #bbe1fa;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .exercise p {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        code {
+            background: #0a0e27;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #ffd93d;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+            transform: scale(1.02);
+        }
+        .output {
+            margin-top: 15px;
+            padding: 15px;
+            background: #0a0e27;
+            border-radius: 8px;
+            border: 1px solid #3282b8;
+            color: #00ff00;
+            font-size: 14px;
+            min-height: 50px;
+            white-space: pre-wrap;
+        }
+        .hint {
+            background: rgba(50, 130, 184, 0.1);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #bbe1fa;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #3282b8;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧩 Task 15: Functions, Closures & IIFE</h1>
+        <p class="subtitle">Master advanced JavaScript function concepts</p>
+
+        <div class="exercise-grid">
+            <!-- Exercise 1: Function Basics -->
+            <div class="exercise">
+                <span class="badge">FUNCTION</span>
+                <h3>1. Calculate Area</h3>
+                <p>Write a function that calculates the area of a rectangle.</p>
+                <p><code>calculateArea(length, width)</code></p>
+                <button onclick="exercise1()">Run Exercise 1</button>
+                <div id="output1" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: function calculateArea(l, w) { return l * w; }
+                </div>
+            </div>
+
+            <!-- Exercise 2: Arrow Functions -->
+            <div class="exercise">
+                <span class="badge">ARROW FUNCTION</span>
+                <h3>2. Find Maximum</h3>
+                <p>Use an arrow function to find the maximum of three numbers.</p>
+                <p><code>const max = (a, b, c) => ...</code></p>
+                <button onclick="exercise2()">Run Exercise 2</button>
+                <div id="output2" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: Use Math.max() or ternary operators
+                </div>
+            </div>
+
+            <!-- Exercise 3: Closure Counter -->
+            <div class="exercise">
+                <span class="badge">CLOSURE</span>
+                <h3>3. Counter with Closure</h3>
+                <p>Create a counter that increments each time it's called using closure.</p>
+                <button onclick="exercise3()">Run Exercise 3</button>
+                <div id="output3" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: Return a function from outer function that accesses outer variable
+                </div>
+            </div>
+
+            <!-- Exercise 4: Private Variables -->
+            <div class="exercise">
+                <span class="badge">CLOSURE</span>
+                <h3>4. Private Variables</h3>
+                <p>Create a function that returns methods to get/set a private variable.</p>
+                <button onclick="exercise4()">Run Exercise 4</button>
+                <div id="output4" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: Use closure to hide variable from global scope
+                </div>
+            </div>
+
+            <!-- Exercise 5: IIFE Basic -->
+            <div class="exercise">
+                <span class="badge">IIFE</span>
+                <h3>5. Immediately Invoked Function</h3>
+                <p>Use IIFE to execute code immediately without polluting global scope.</p>
+                <button onclick="exercise5()">Run Exercise 5</button>
+                <div id="output5" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: (function() { ... })();
+                </div>
+            </div>
+
+            <!-- Exercise 6: IIFE with Parameters -->
+            <div class="exercise">
+                <span class="badge">IIFE</span>
+                <h3>6. IIFE Calculator</h3>
+                <p>Create an IIFE that takes parameters and returns result.</p>
+                <button onclick="exercise6()">Run Exercise 6</button>
+                <div id="output6" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: (function(a, b) { return a + b; })(5, 3);
+                </div>
+            </div>
+
+            <!-- Exercise 7: Closure in Loop -->
+            <div class="exercise">
+                <span class="badge">CLOSURE</span>
+                <h3>7. Closure in Loop</h3>
+                <p>Create multiple functions in a loop using closure correctly.</p>
+                <button onclick="exercise7()">Run Exercise 7</button>
+                <div id="output7" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: Use let or IIFE to capture loop variable
+                </div>
+            </div>
+
+            <!-- Exercise 8: Function Factory -->
+            <div class="exercise">
+                <span class="badge">CLOSURE</span>
+                <h3>8. Function Factory</h3>
+                <p>Create a function that generates multiplier functions.</p>
+                <p><code>makeMultiplier(factor)</code></p>
+                <button onclick="exercise8()">Run Exercise 8</button>
+                <div id="output8" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: Return a function that uses the factor parameter
+                </div>
+            </div>
+
+            <!-- Exercise 9: Module Pattern -->
+            <div class="exercise">
+                <span class="badge">ADVANCED</span>
+                <h3>9. Module Pattern</h3>
+                <p>Create a calculator module using IIFE and closures.</p>
+                <button onclick="exercise9()">Run Exercise 9</button>
+                <div id="output9" class="output">Click button to see result</div>
+                <div class="hint">
+                    💡 Hint: IIFE returns object with public methods
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Exercise 1: Basic Function
+        function exercise1() {
+            // TODO: Implement calculateArea function
+            // function calculateArea(length, width) {
+            //     return length * width;
+            // }
+            // const area = calculateArea(10, 5);
+            
+            document.getElementById('output1').textContent = 
+                '🔨 Implement calculateArea function\nExpected: calculateArea(10, 5) = 50';
+        }
+
+        // Exercise 2: Arrow Function
+        function exercise2() {
+            // TODO: Implement max arrow function
+            // const max = (a, b, c) => Math.max(a, b, c);
+            // const result = max(10, 25, 15);
+            
+            document.getElementById('output2').textContent = 
+                '🔨 Implement max arrow function\nExpected: max(10, 25, 15) = 25';
+        }
+
+        // Exercise 3: Closure Counter
+        function exercise3() {
+            // TODO: Implement counter using closure
+            // function createCounter() {
+            //     let count = 0;
+            //     return function() {
+            //         count++;
+            //         return count;
+            //     };
+            // }
+            // const counter = createCounter();
+            // const results = [counter(), counter(), counter()];
+            
+            document.getElementById('output3').textContent = 
+                '🔨 Implement counter with closure\nExpected: 1, 2, 3 on each call';
+        }
+
+        // Exercise 4: Private Variables
+        function exercise4() {
+            // TODO: Implement private variable pattern
+            // function createPerson(name) {
+            //     let privateName = name;
+            //     return {
+            //         getName: function() { return privateName; },
+            //         setName: function(newName) { privateName = newName; }
+            //     };
+            // }
+            // const person = createPerson("Manas");
+            
+            document.getElementById('output4').textContent = 
+                '🔨 Implement private variable pattern\nExpected: getName() and setName() methods';
+        }
+
+        // Exercise 5: Basic IIFE
+        function exercise5() {
+            // TODO: Implement IIFE
+            // const result = (function() {
+            //     const greeting = "Hello from IIFE!";
+            //     return greeting;
+            // })();
+            
+            document.getElementById('output5').textContent = 
+                '🔨 Implement IIFE\nExpected: "Hello from IIFE!"';
+        }
+
+        // Exercise 6: IIFE with Parameters
+        function exercise6() {
+            // TODO: Implement IIFE with parameters
+            // const sum = (function(a, b) {
+            //     return a + b;
+            // })(10, 20);
+            
+            document.getElementById('output6').textContent = 
+                '🔨 Implement IIFE calculator\nExpected: sum of 10 + 20 = 30';
+        }
+
+        // Exercise 7: Closure in Loop
+        function exercise7() {
+            // TODO: Fix closure in loop problem
+            // const funcs = [];
+            // for (let i = 0; i < 3; i++) {
+            //     funcs.push(function() { return i; });
+            // }
+            // const results = funcs.map(f => f());
+            
+            document.getElementById('output7').textContent = 
+                '🔨 Implement closure in loop\nExpected: [0, 1, 2]';
+        }
+
+        // Exercise 8: Function Factory
+        function exercise8() {
+            // TODO: Implement function factory
+            // function makeMultiplier(factor) {
+            //     return function(number) {
+            //         return number * factor;
+            //     };
+            // }
+            // const multiplyBy5 = makeMultiplier(5);
+            // const result = multiplyBy5(10);
+            
+            document.getElementById('output8').textContent = 
+                '🔨 Implement function factory\nExpected: multiplyBy5(10) = 50';
+        }
+
+        // Exercise 9: Module Pattern
+        function exercise9() {
+            // TODO: Implement module pattern
+            // const calculator = (function() {
+            //     let result = 0;
+            //     return {
+            //         add: function(x) { result += x; return this; },
+            //         subtract: function(x) { result -= x; return this; },
+            //         getResult: function() { return result; }
+            //     };
+            // })();
+            // calculator.add(10).subtract(3);
+            
+            document.getElementById('output9').textContent = 
+                '🔨 Implement calculator module\nExpected: calculator.add(10).subtract(3) = 7';
+        }
+    </script>
+</body>
+</html>
